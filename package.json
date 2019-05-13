@@ -1,0 +1,25 @@
+{
+    "name": "edje",
+    "displayName": "Edje",
+    "description": "Edje language support for Visual Studio Code",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.33.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "edc",
+            "aliases": ["edc", "edc"],
+            "extensions": [".edc"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "edc",
+            "scopeName": "source.edc",
+            "path": "./syntaxes/edc.tmLanguage.json"
+        }]
+    }
+}
