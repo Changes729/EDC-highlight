@@ -10,11 +10,70 @@
 		}
 	],
 	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.block.edc",
+					"begin": "/\\*",
+					"end": "\\*/"
+				},
+				{
+					"name": "comment.line.double-slash.edc",
+					"begin": "//",
+					"end": "$\\n?"
+				}
+			]
+		},
+		"efl_version": {
+			"match": "\\s*(efl_version)\\s*:\\s*([0-9]+)\\s+([0-9]+)\\s+",
+			"captures": {
+				"1": { "name": "keyword.other.edc" },
+				"2": { "name": "constant.numeric.edc" },
+				"3": { "name": "constant.numeric.edc" }
+			}
+		},
+		"include": {
+			"match": "\\s*(#incluide)\\s+(\"\\w+\")\\s*",
+			"captures": {
+				"1": { "name": "keyword.other.edc" },
+				"2": { "name": "string.quoted.double.edc" }
+			}
+		},
+		"precompile": {
+			"patterns": [
+				{
+					"name": "keyword.precompile.edc",
+					"match": "\\s*(#ifdef|#ifndef)\\s+([A-Za-z0-9_]+)\\s*",
+					"captures": {
+						"1": { "name": "keyword.precompile.edc" },
+						"2": { "name": "constant.macro.edc" }
+					}
+				},
+				{
+					"name": "keyword.precompile.edc",
+					"match": "\\s*(#define)\\s+([A-Za-z0-9_]+)\\s*",
+					"captures": {
+						"1": {"name": "keyword.precompile.edc"},
+						"2": {"name": "constant.macro.edc"}
+					}
+				},
+				{
+					"name": "keyword.precompile.edc",
+					"match": "\\b(#if|#else|#elif|#endif)\\b"
+				}
+			]
+		},
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.edc",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
+			"patterns": [
+				{
+					"name": "keyword.control.edc",
+					"match": "\\b(collections|group|for|return)\\b"
+				}
+			]
+		},
+		"functions": {
+			"name": "keyword.function.edc",
+			"match": "\\b(numargs)\\b"
 		},
 		"strings": {
 			"name": "string.quoted.double.edc",
@@ -26,6 +85,10 @@
 					"match": "\\\\."
 				}
 			]
+		},
+		"number": {
+			"name": "constant.numeric.edc",
+			"match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)\\b"
 		}
 	},
 	"scopeName": "source.edc"

@@ -1,0 +1,52 @@
+
+#include "include.edc"
+
+collections
+{
+   group
+   {
+	  name: "example";
+	  parts
+	  {
+		 // create the part
+		 part
+		 {
+			name: "rectangle";
+			// set the type to RECT (rectangle)
+			type: RECT;
+			// default state (blue color)
+			description
+			{
+			   state: "default" 0.0;
+			   align: 0.0 0.0;
+			   min: 200 200;
+			   // blue color
+			   color: 0 0 255 255;
+			}
+			// second state (red color)
+			description
+			{
+			   state: "red" 0.0;
+			   align: 0.0 0.0;
+			   min: 300 300;
+			   // red color
+			   color: 255 0 0 255;
+			}
+		 }
+	  }
+	  programs
+	  {
+		 // create a program
+		 program
+		 {
+			name: "change_color";
+			// program is triggered on mouse click
+			signal: "mouse,clicked,*";
+			source: "*";
+			// set the red state of the "rectangle" part
+			action: STATE_SET "red" 0.0;
+			target: "rectangle";
+		 }
+	  }
+   }
+}
