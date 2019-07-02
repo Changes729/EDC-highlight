@@ -1,65 +1,38 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "edc",
+	"scopeName": "source.edc",
 	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		}
+		{"include": "#value"}
 	],
 	"repository": {
 		"comments": {
 			"patterns": [
 				{
-					"name": "comment.block.edc",
+					"begin": "/\\*\\*(?!/)",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.edc"
+						}
+					},
+					"end": "\\*/",
+					"name": "comment.block.documentation.edc"
+				},
+				{
 					"begin": "/\\*",
-					"end": "\\*/"
-				},
-				{
-					"name": "comment.line.double-slash.edc",
-					"begin": "//",
-					"end": "$\\n?"
-				}
-			]
-		},
-		"efl_version": {
-			"match": "\\s*(efl_version)\\s*:\\s*([0-9]+)\\s+([0-9]+)\\s+",
-			"captures": {
-				"1": { "name": "keyword.other.edc" },
-				"2": { "name": "constant.numeric.edc" },
-				"3": { "name": "constant.numeric.edc" }
-			}
-		},
-		"include": {
-			"match": "\\s*(#incluide)\\s+(\"\\w+\")\\s*",
-			"captures": {
-				"1": { "name": "keyword.other.edc" },
-				"2": { "name": "string.quoted.double.edc" }
-			}
-		},
-		"precompile": {
-			"patterns": [
-				{
-					"name": "keyword.precompile.edc",
-					"match": "\\s*(#ifdef|#ifndef)\\s+([A-Za-z0-9_]+)\\s*",
 					"captures": {
-						"1": { "name": "keyword.precompile.edc" },
-						"2": { "name": "constant.macro.edc" }
-					}
+						"0": {
+							"name": "punctuation.definition.comment.edc"
+						}
+					},
+					"end": "\\*/",
+					"name": "comment.block.edc"
 				},
 				{
-					"name": "keyword.precompile.edc",
-					"match": "\\s*(#define)\\s+([A-Za-z0-9_]+)\\s*",
+					"match": "(//).*$\\n?",
 					"captures": {
-						"1": {"name": "keyword.precompile.edc"},
-						"2": {"name": "constant.macro.edc"}
-					}
-				},
-				{
-					"name": "keyword.precompile.edc",
-					"match": "\\b(#if|#else|#elif|#endif)\\b"
+						"1": {"name": "punctuation.definition.comment.edc"}
+					},
+					"name": "comment.line.double-slash.js"
 				}
 			]
 		},
@@ -67,15 +40,11 @@
 			"patterns": [
 				{
 					"name": "keyword.control.edc",
-					"match": "\\b(collections|group|for|return)\\b"
+					"match": "\\b(description|align)\\b|(#define)"
 				}
 			]
 		},
-		"functions": {
-			"name": "keyword.function.edc",
-			"match": "\\b(numargs)\\b"
-		},
-		"strings": {
+		"string": {
 			"name": "string.quoted.double.edc",
 			"begin": "\"",
 			"end": "\"",
@@ -89,7 +58,37 @@
 		"number": {
 			"name": "constant.numeric.edc",
 			"match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)\\b"
+		},
+		"constant": {
+			"patterns": [
+				{
+					"match": "([a-z,A-Z]+[a-z,A-Z,0-9,_]+)\\s*[\\{?|\\n?]",
+					"captures": {
+						"1": {"name": "support.type.property-name.edc"}
+					},
+					"name": ""
+				},
+				{
+					"match": "([a-z,A-Z]+[a-z,A-Z,0-9,_,.]+)\\s*:",
+					"captures": {
+						"1": {"name": "constant.character.escape.edc"}
+					},
+					"name": ""
+				},
+				{
+					"match": "\\\\.",
+					"name": "invalid.illegal.unrecognized-string-escape.json"
+				}
+			]
+		},
+		"value": {
+			"patterns": [
+				{"include": "#keywords"},
+				{"include": "#string"},
+				{"include": "#comments"},
+				{"include": "#number"},
+				{"include": "#constant"}
+			]
 		}
-	},
-	"scopeName": "source.edc"
+	}
 }
