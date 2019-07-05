@@ -3,6 +3,7 @@
     "displayName": "Edje",
     "description": "Edje language support for Visual Studio Code",
     "version": "0.0.1",
+    "publisher": "asuki",
     "engines": {
         "vscode": "^1.33.0"
     },
