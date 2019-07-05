@@ -40,7 +40,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.edc",
-					"match": "\\b(description|align)\\b|(#define)"
+					"match": "(#include)|(#define)"
 				}
 			]
 		},
